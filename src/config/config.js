@@ -1,0 +1,1 @@
+export const API_URL = 'https://yw.52kfw.cn'

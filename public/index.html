@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+  <title>
+    <%= htmlWebpackPlugin.options.title %>
+  </title>
+</head>
+
+<body>
+  <noscript>
+    <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled.
+        Please enable it to continue.</strong>
+  </noscript>
+  <div id="app"></div>
+  <!-- built files will be auto injected -->
+</body>
+<script>
+  // rem适配
+  !(function (doc, win) {
+    var docHtml = doc.documentElement;
+    // 判断窗口有没有orientationchange这个方法，有就赋值给一个变量，没有就返回resize方法
+    (resizeEvt = "orientationchange" in window ? "orientationchange" : "resize"),
+      (resizes = function () {
+        // 获取当前屏幕的大小
+        var cw = docHtml.clientWidth;
+
+        // 如果没有获取到当前屏幕的大小
+        if (!cw) return;
+
+        if (cw >= 750) {
+          docHtml.style.fontSize = "100px";
+        } else {
+          // 动态修改font-size 100 * (375 / 750) = 50 （iPhone6/7/8为例）
+          docHtml.style.fontSize = 100 * (cw / 750) + "px";
+        }
+      });
+    if (!doc.addEventListener) return;
+    /*
+          addEventListener事件方法接受三个参数：
+          （1）事件名
+          （2）回调执行函数
+          （3）是否冒泡
+      */
+    win.addEventListener(resizeEvt, resizes, false);
+    // 绑定浏览器缩放与加载事件
+    doc.addEventListener("DOMContentLoaded", resizes, false);
+  })(document, window);
+</script>
+
+</html>
